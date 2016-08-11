@@ -38,7 +38,7 @@ var x;
 var y=Y0;
 
 function update(){
-	t+=0.01;
+	t+=0.05;
 	y=Y0;
 	for(i=0;i<NROWS*NCOLS*4*4;i+=NCOLS*4){
 		y+=YS;
@@ -48,8 +48,9 @@ function update(){
 //			img.data[i+j+1]=(255+t)%255;
 //			img.data[i+j+1]=255*Math.sin(t);
 //			if((Math.sin(x)+Math.cos(y))>0){
-			img.data[i+j+0]=255*Math.sin(x-y+t);
-			img.data[i+j+1]=255*Math.sin(x+y+t);
+			img.data[i+j+0]=Math.abs(255*Math.sin(x-y));
+			img.data[i+j+1]=Math.abs(255*Math.sin(x+y));
+			img.data[i+j+2]=255*Math.abs(Math.sin(t));
 /*
 			if((Math.sin(x))>0){
 				img.data[i+j+0]=0;
@@ -59,7 +60,7 @@ function update(){
 				img.data[i+j+1]=0;
 			}
 */
-			img.data[i+j+2]=0;
+//			img.data[i+j+2]=0;
 			img.data[i+j+3]=255;
 		}
 	}
