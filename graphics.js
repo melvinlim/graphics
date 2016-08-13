@@ -51,15 +51,6 @@ function update(){
 			img.data[i+j+0]=Math.abs(255*Math.sin(x-y));
 			img.data[i+j+1]=Math.abs(255*Math.sin(x+y));
 			img.data[i+j+2]=255*Math.abs(Math.sin(t));
-/*
-			if((Math.sin(x))>0){
-				img.data[i+j+0]=0;
-				img.data[i+j+1]=255*Math.sin(t+x);
-			}else{
-				img.data[i+j+0]=255*Math.sin(t+x);
-				img.data[i+j+1]=0;
-			}
-*/
 //			img.data[i+j+2]=0;
 			img.data[i+j+3]=255;
 		}
