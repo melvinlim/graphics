@@ -42,7 +42,7 @@ var y2;
 function update2R(){
 	t0=t0+TS;
 	y0=Y0;
-	for(i=0;i<NROWS*NCOLS*4*4;i+=NCOLS*4){
+	for(i=0;i<NROWS*NCOLS*4;i+=NCOLS*4){
 		y0=y0+YS;
 		x0=X0;
 		for(j=0;j<NCOLS*4;j+=4){

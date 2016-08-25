@@ -31,7 +31,7 @@ var y=Y0;
 function updateG(){
 	t+=0.05;
 	y=Y0;
-	for(i=0;i<NROWS*NCOLS*4*4;i+=NCOLS*4){
+	for(i=0;i<NROWS*NCOLS*4;i+=NCOLS*4){
 		y+=YS;
 		x=X0;
 		for(j=0;j<NCOLS*4;j+=4){

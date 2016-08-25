@@ -32,7 +32,7 @@ var y=Y0;
 function updateR(){
 	t=t+TS;
 	y=Y1;
-	for(i=0;i<NROWS*NCOLS*4*4;i+=NCOLS*4){
+	for(i=0;i<NROWS*NCOLS*4;i+=NCOLS*4){
 		y=y-YS;
 		x=X1;
 		for(j=0;j<NCOLS*4;j+=4){
