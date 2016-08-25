@@ -10,7 +10,6 @@ var YS=  1;
 var X0= -NCOLS/2;
 var X1= +NCOLS/2;
 var XS=  1;
-//dotrotationCanvas.clearRect(0,0,NCOLS,NROWS);
 
 var x;
 var y=Y0;
@@ -25,14 +24,12 @@ function initPoints(points){
 	var x1 = +50;
 	var y0 = -50;
 	var y1 = +50;
-/*
 	for(i=y0;i<y1;i++){
 		for(j=x0;j<x1;j++){
 			points.push({x:j,y:i});
 		}
 	}
-*/
-	points.push({x:0,y:10});
+	//points.push({x:0,y:10});
 }
 
 function printPoints(points){
@@ -50,25 +47,16 @@ function dotrotationUpdate(){
 	for(i=0;i<len;i++){
 		map(points[i]);
 		rotate(points[i]);
+//		correct(points[i]);
 	}
+	dotrotationCanvas.clearRect(0,0,NCOLS*4,NROWS*4);
 	dotrotationCanvas.putImageData(dotrotationImg,0,0);
 }
 
-//	for(i=0;i<NROWS*NCOLS*4;i+=NCOLS*4){
-//		x=X0;
-//		for(j=0;j<NCOLS*4;j+=4){
-//			dotrotationImg.data[i+j+0]=Math.abs(255*Math.sin(x-y));
-//			dotrotationImg.data[i+j+1]=Math.abs(255*Math.sin(x+y));
-//			dotrotationImg.data[i+j+2]=255*Math.abs(Math.sin(t));
-//			dotrotationImg.data[i+j+3]=255;
-//			x+=XS;
-//		}
-//		y+=YS;
-//	}
-
 function map(point){
-	var j=(point.x+(X1))*4;
-	var i=(point.y+(Y1))*NCOLS*4;
+	var j=((point.x+(X1))*4)|0;
+	var i=((point.y+(Y1))*NCOLS*4)|0;
+
 //	j=j.toFixed();
 //	i=i.toFixed();
 //	alert(point.x+' '+point.y);
@@ -79,10 +67,33 @@ function map(point){
 	dotrotationImg.data[i+j+3]=255;
 }
 
-var STEPSIZE=0.5;
+var STEPSIZE=0.2;
 
 function rotate(point){
 //	alert(point.x+' '+point.y);
-	point.x += STEPSIZE*((-1)*point.y)|0;
-	point.y += STEPSIZE*((+1)*point.x)|0;
+	tmpx=point.x;
+	tmpy=point.y;
+	//point.x += STEPSIZE*((-1)*tmpy)|0;
+	//point.y += STEPSIZE*((+1)*tmpx)|0;
+	if(pLength(point)>11){
+		point.x += STEPSIZE*((-1)*point.y)|0;
+		point.y += STEPSIZE*((+1)*point.x)|0;
+	}else{
+		point.y += STEPSIZE*((+1)*point.x)|0;
+		point.x += STEPSIZE*((-1)*point.y)|0;
+	}
+}
+
+function correct(point){
+	if(pLength(point)>11){
+		if(point.x >= point.y){
+			point.x-=1|0;
+		}else{
+			point.y-=1|0;
+		}
+	}
+}
+
+function pLength(point){
+	return Math.sqrt(point.x*point.x+point.y*point.y);
 }
